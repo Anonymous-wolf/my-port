@@ -1,6 +1,6 @@
 import React from 'react';
 import { Medal, Trophy, Award, Star, Crown, Target, Users, Zap, Globe, Code, Brain, Lightbulb } from 'lucide-react';
-import pesImg from '../images/pes.jpg';
+
 
 const Achievements = () => {
   const achievements = [
@@ -14,6 +14,7 @@ const Achievements = () => {
       icon: <Crown className="w-6 h-6" />,
       color: "purple",
       priority: "high",
+      image:"src/images/sac.jpg",
       hasImage: true
     },
     {
@@ -369,7 +370,7 @@ const Achievements = () => {
                       {/* Image Placeholder */}
                       <div className="mb-4 p-4 bg-gray-700/50 rounded-lg border border-gray-600 text-center">
                         <div className="text-4xl mb-2"> 
-                          <img src={pesImg} alt="Achievement photo" className="w-full h-32 object-cover rounded-lg" />
+                          <img src={achievement.image} alt="Achievement photo" className="w-full h-32 object-cover rounded-lg" />
 
                         </div>
                         <div className="text-xs text-gray-400">Achievement Photo</div>
