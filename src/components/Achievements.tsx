@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Medal, Trophy, Award, Star, Crown, Target, Users, Zap, Globe, Code, Brain, Lightbulb } from 'lucide-react';
+import './Achievements.css';
 
 
 const Achievements = () => {
@@ -407,17 +408,17 @@ const Achievements = () => {
                     className="flex overflow-x-auto gap-6 scrollbar-hide px-2"
                     style={{
                       scrollSnapType: 'x mandatory',
-                      width: '1200px', // Increased from 1020px to 1200px for 3 full cards
-                      maxWidth: '100%',
+                      width: '100%',
+                      maxWidth: '1200px',
                     }}
                   >
                     {categoryAchievements.map((achievement, index) => (
                       <div
                         key={index}
-                        className="w-[380px] flex-shrink-0 achievement-card group relative p-6 rounded-2xl bg-gray-800/70 border border-gray-700 hover:border-blue-500 transition-all duration-500 hover:scale-105 transform backdrop-blur-sm hover:shadow-2xl"
+                        className="w-[90vw] sm:w-[340px] md:w-[360px] lg:w-[380px] flex-shrink-0 achievement-card group relative p-6 rounded-2xl bg-gray-800/70 border border-gray-700 hover:border-blue-500 transition-all duration-500 hover:scale-105 transform backdrop-blur-sm hover:shadow-2xl"
                         style={{
                           scrollSnapAlign: 'start',
-                          perspective: '1200px', // 3D perspective for the card
+                          perspective: '1200px',
                         }}
                       >
                         <div
@@ -500,7 +501,7 @@ const Achievements = () => {
                   </div>
                 </div>
               ) : (
-                <div className={`grid ${categoryAchievements.length === 1 ? "place-items-center" : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"} gap-6`}>
+                <div className={`grid ${categoryAchievements.length === 1 ? "place-items-center" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"} gap-6`}>
                   {categoryAchievements.map((achievement, index) => (
                     <div
                       key={index}
