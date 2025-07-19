@@ -69,7 +69,7 @@ const Achievements = () => {
     // Hackathons & National Competitions
     {
       title: "Virtusa Corporation Hackathon Winner",
-      category: "National Hackathon",
+      category: "Prestigious Hackathons",
       type: "Winner",
       year: "2025",
       description: "Led a team of 6 members and built a Police Connect app, reducing violation registrations and response time by 60% using real-time alerting and streamlined grievance handling. Virtusa Corporation is an American-based global information technology services company.",
@@ -82,7 +82,7 @@ const Achievements = () => {
 
     {
       title: "Smart India Hackathon Finalist 2024",
-      category: "National Hackathon",
+      category: "Prestigious Hackathons",
       type: "Finalist",
       year: "2024",
       description: "Selected as finalist in Smart India Hackathon 2024, India's biggest hackathon initiative by Government of India.",
@@ -94,7 +94,7 @@ const Achievements = () => {
     },
     {
       title: "Smart India Hackathon Finalist 2023",
-      category: "National Hackathon",
+      category: "Prestigious Hackathons",
       type: "Finalist",
       year: "2023",
       description: "Achieved finalist status in Smart India Hackathon 2023, demonstrating innovative problem-solving capabilities.",
