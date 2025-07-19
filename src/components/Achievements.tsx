@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Medal, Trophy, Award, Star, Crown, Target, Users, Zap, Globe, Code, Brain, Lightbulb } from 'lucide-react';
 
 
@@ -20,9 +20,9 @@ const Achievements = () => {
     {
       title: "IEEE SB Best Student Chapter Award",
       category: "IEEE Recognition",
-      type: "Award - $510 USD",
+      type: "Award - $500 USD",
       year: "2024",
-      description: "Received IEEE Student Branch Best Student Chapter Award worth $510 USD for outstanding chapter performance and leadership.",
+      description: "Received IEEE Student Branch Best Student Chapter Award worth $500 USD for outstanding chapter performance and leadership.",
       icon: <Trophy className="w-6 h-6" />,
       color: "yellow",
       priority: "high",
@@ -256,26 +256,23 @@ const Achievements = () => {
     }
   ];
 
-  // Group achievements by category
-  const groupedAchievements = achievements.reduce((acc, achievement) => {
-    if (!acc[achievement.category]) {
-      acc[achievement.category] = [];
-    }
-    acc[achievement.category].push(achievement);
-    return acc;
-  }, {} as Record<string, typeof achievements>);
-
   // Sort categories by importance
   const categoryOrder = [
     'Prestigious Hackathons',
     'Professional Recognition',
-    'IEEE Recognition',
-    'IEEE Funding',
+    // Group all IEEE categories together under one label
+    'IEEE Achievements',
     'Technical Competition',
     'Prestigious Competition',
-    'IEEE Leadership',
-    'IEEE Competition',
     'Leadership Role'
+  ];
+
+  // Group IEEE categories together
+  const ieeeCategories = [
+    'IEEE Recognition',
+    'IEEE Funding',
+    'IEEE Leadership',
+    'IEEE Competition'
   ];
 
   const getColorClasses = (color: string) => {
@@ -306,6 +303,20 @@ const Achievements = () => {
     }
     return null;
   };
+
+  // Group achievements by category, merging IEEE categories
+  const groupedAchievements = achievements.reduce((acc, achievement) => {
+    // If achievement is an IEEE category, group under 'IEEE Achievements'
+    const category = ieeeCategories.includes(achievement.category)
+      ? 'IEEE Achievements'
+      : achievement.category;
+
+    if (!acc[category]) {
+      acc[category] = [];
+    }
+    acc[category].push(achievement);
+    return acc;
+  }, {} as Record<string, typeof achievements>);
 
   return (
     <section id="achievements" className="py-20 bg-gray-900 relative overflow-hidden">
@@ -350,81 +361,219 @@ const Achievements = () => {
           const categoryAchievements = groupedAchievements[category];
           if (!categoryAchievements) return null;
 
+          const showSlider = categoryAchievements.length > 3;
+          const sliderRef = useRef<HTMLDivElement>(null);
+          const [currentSlide, setCurrentSlide] = useState(0);
+          const slidesCount = Math.ceil(categoryAchievements.length / 3);
+
+          // Auto-scroll only to the right, loop to start
+          useEffect(() => {
+            if (!showSlider || !sliderRef.current) return;
+            const interval = setInterval(() => {
+              setCurrentSlide((prev) => (prev + 1) % slidesCount);
+            }, 3500);
+            return () => clearInterval(interval);
+          }, [showSlider, slidesCount]);
+
+          useEffect(() => {
+            if (showSlider && sliderRef.current) {
+              sliderRef.current.scrollTo({
+                left: currentSlide * 1200,
+                behavior: 'smooth',
+              });
+            }
+          }, [currentSlide, showSlider]);
+
+          const scrollLeft = () => {
+            setCurrentSlide((prev) => (prev - 1 + slidesCount) % slidesCount);
+          };
+          const scrollRight = () => {
+            setCurrentSlide((prev) => (prev + 1) % slidesCount);
+          };
+
           return (
             <div key={category} className="mb-12">
-              <h3 className="text-2xl font-bold text-gray-300 mb-6 text-center">
-                {category}
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {categoryAchievements.map((achievement, index) => (
-                  <div
-                    key={index}
-                    className={`achievement-card group relative p-6 rounded-xl bg-gray-800/70 border border-gray-700 hover:border-${achievement.color}-500 transition-all duration-500 hover:scale-105 transform backdrop-blur-sm hover:shadow-2xl hover:shadow-${achievement.color}-500/30`}
+              <h3 className="text-2xl font-bold text-gray-300 mb-6 text-center">{category}</h3>
+              {showSlider ? (
+                <div className="relative flex flex-col items-center overflow-hidden">
+                  <button
+                    onClick={scrollLeft}
+                    className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-gray-800/80 hover:bg-gray-700 p-2 rounded-full shadow-lg"
                   >
-                    {getPriorityBadge(achievement.priority)}
-
-                    {/* Image placeholder */}
-                    {achievement.hasImage && (
-                      <div className="absolute -top-3 -left-3">
-                        <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center shadow-lg">
-                          <span className="text-xs">📸</span>
-                        </div>
-                      </div>
-                    )}
-
-                    <div className="relative z-10">
-                      {/* Header */}
-                      <div className="flex items-start mb-4">
-                        <div className={`p-3 bg-gradient-to-r ${getColorClasses(achievement.color)} rounded-xl mr-4 group-hover:scale-110 transition-transform duration-300`}>
-                          <div className="text-white">
-                            {achievement.icon}
+                    <svg width="24" height="24" fill="none"><path d="M15 19l-7-7 7-7" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  </button>
+                  <div
+                    ref={sliderRef}
+                    className="flex overflow-x-auto gap-6 scrollbar-hide px-2"
+                    style={{
+                      scrollSnapType: 'x mandatory',
+                      width: '1200px', // Increased from 1020px to 1200px for 3 full cards
+                      maxWidth: '100%',
+                    }}
+                  >
+                    {categoryAchievements.map((achievement, index) => (
+                      <div
+                        key={index}
+                        className="w-[380px] flex-shrink-0 achievement-card group relative p-6 rounded-2xl bg-gray-800/70 border border-gray-700 hover:border-blue-500 transition-all duration-500 hover:scale-105 transform backdrop-blur-sm hover:shadow-2xl"
+                        style={{
+                          scrollSnapAlign: 'start',
+                          perspective: '1200px', // 3D perspective for the card
+                        }}
+                      >
+                        <div
+                          className="relative z-10 transition-transform duration-500 group-hover:rotate-y-6 group-hover:-rotate-x-3 group-hover:scale-105"
+                          style={{
+                            transformStyle: 'preserve-3d',
+                            willChange: 'transform',
+                          }}
+                        >
+                          {getPriorityBadge(achievement.priority)}
+                          {/* Image at the top */}
+                          {achievement.hasImage && (
+                            <div className="w-full mb-4">
+                              <div className="relative w-full" style={{ aspectRatio: "16 / 9" }}>
+                                <img
+                                  src={achievement.image}
+                                  alt="Achievement photo"
+                                  className="w-full h-full object-cover rounded-2xl shadow-lg group-hover:shadow-2xl group-hover:shadow-blue-400/30 transition-shadow duration-500"
+                                  style={{
+                                    transform: 'translateZ(20px)',
+                                  }}
+                                />
+                              </div>
+                            </div>
+                          )}
+                          {/* Header */}
+                          <div className="flex items-start mb-4">
+                            <div className={`p-3 bg-gradient-to-r ${getColorClasses(achievement.color)} rounded-xl mr-4 group-hover:scale-110 transition-transform duration-300`}>
+                              <div className="text-white">
+                                {achievement.icon}
+                              </div>
+                            </div>
+                            <div className="flex-1">
+                              <div className="flex items-center justify-between mb-1">
+                                <span className={`px-3 py-1 bg-${achievement.color}-500/20 text-${achievement.color}-400 rounded-full text-xs font-semibold`}>
+                                  {achievement.type}
+                                </span>
+                                <span className="text-xs text-gray-500">{achievement.year}</span>
+                              </div>
+                              <h3 className={`text-lg font-bold text-white group-hover:text-${achievement.color}-400 transition-colors duration-300 mb-1`}>
+                                {achievement.title}
+                              </h3>
+                            </div>
                           </div>
-                        </div>
-                        <div className="flex-1">
-                          <div className="flex items-center justify-between mb-1">
-                            <span className={`px-3 py-1 bg-${achievement.color}-500/20 text-${achievement.color}-400 rounded-full text-xs font-semibold`}>
-                              {achievement.type}
+                          {/* Description */}
+                          <p className="text-gray-300 text-sm mb-4 leading-relaxed">
+                            {achievement.description}
+                          </p>
+                          {/* Footer */}
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs text-gray-500 uppercase tracking-wider">
+                              {achievement.category}
                             </span>
-                            <span className="text-xs text-gray-500">{achievement.year}</span>
+                            <div className="flex space-x-1">
+                              {[...Array(achievement.priority === 'high' ? 5 : 4)].map((_, i) => (
+                                <Star key={i} className="w-3 h-3 text-yellow-400 fill-current" />
+                              ))}
+                            </div>
                           </div>
-                          <h3 className={`text-lg font-bold text-white group-hover:text-${achievement.color}-400 transition-colors duration-300 mb-1`}>
-                            {achievement.title}
-                          </h3>
                         </div>
+                        {/* Animated Background */}
+                        <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br from-${achievement.color}-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
                       </div>
-
-                      {/* Description */}
-                      <p className="text-gray-300 text-sm mb-4 leading-relaxed">
-                        {achievement.description}
-                      </p>
-
-                      {/* Image Placeholder */}
-                      <div className="mb-4 p-4 bg-gray-700/50 rounded-lg border border-gray-600 text-center">
-                        <div className="text-4xl mb-2">
-                          <img src={achievement.image} alt="Achievement photo" className="w-full h-32 object-cover rounded-lg" />
-
-                        </div>
-                        <div className="text-xs text-gray-400">Achievement Photo</div>
-                      </div>
-
-                      {/* Footer */}
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs text-gray-500 uppercase tracking-wider">
-                          {achievement.category}
-                        </span>
-                        <div className="flex space-x-1">
-                          {[...Array(achievement.priority === 'high' ? 5 : 4)].map((_, i) => (
-                            <Star key={i} className="w-3 h-3 text-yellow-400 fill-current" />
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Animated Background */}
-                    <div className={`absolute inset-0 rounded-xl bg-gradient-to-br from-${achievement.color}-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                  <button
+                    onClick={scrollRight}
+                    className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-gray-800/80 hover:bg-gray-700 p-2 rounded-full shadow-lg"
+                  >
+                    <svg width="24" height="24" fill="none"><path d="M9 5l7 7-7 7" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  </button>
+                  {/* Pagination Dots */}
+                  <div className="flex justify-center mt-4 space-x-2">
+                    {Array.from({ length: slidesCount }).map((_, idx) => (
+                      <span
+                        key={idx}
+                        className={`w-3 h-3 rounded-full ${currentSlide === idx ? 'bg-blue-400' : 'bg-gray-500'} inline-block transition-all duration-300`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <div className={`grid ${categoryAchievements.length === 1 ? "place-items-center" : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"} gap-6`}>
+                  {categoryAchievements.map((achievement, index) => (
+                    <div
+                      key={index}
+                      className="achievement-card group relative p-6 rounded-2xl bg-gray-800/70 border border-gray-700 hover:border-blue-500 transition-all duration-500 hover:scale-105 transform backdrop-blur-sm hover:shadow-2xl"
+                      style={categoryAchievements.length === 1
+                        ? { maxWidth: 400, width: "100%", perspective: '1200px' }
+                        : { perspective: '1200px' }
+                      }
+                    >
+                      <div
+                        className="relative z-10 transition-transform duration-500 group-hover:rotate-y-6 group-hover:-rotate-x-3 group-hover:scale-105"
+                        style={{
+                          transformStyle: 'preserve-3d',
+                          willChange: 'transform',
+                        }}
+                      >
+                        {getPriorityBadge(achievement.priority)}
+                        {/* Image at the top */}
+                        {achievement.hasImage && (
+                          <div className="w-full mb-4">
+                            <div className="relative w-full" style={{ aspectRatio: "16 / 9" }}>
+                              <img
+                                src={achievement.image}
+                                alt="Achievement photo"
+                                className="w-full h-full object-cover rounded-2xl shadow-lg group-hover:shadow-2xl group-hover:shadow-blue-400/30 transition-shadow duration-500"
+                                style={{
+                                  transform: 'translateZ(20px)',
+                                }}
+                              />
+                            </div>
+                          </div>
+                        )}
+                        {/* Header */}
+                        <div className="flex items-start mb-4">
+                          <div className={`p-3 bg-gradient-to-r ${getColorClasses(achievement.color)} rounded-xl mr-4 group-hover:scale-110 transition-transform duration-300`}>
+                            <div className="text-white">
+                              {achievement.icon}
+                            </div>
+                          </div>
+                          <div className="flex-1">
+                            <div className="flex items-center justify-between mb-1">
+                              <span className={`px-3 py-1 bg-${achievement.color}-500/20 text-${achievement.color}-400 rounded-full text-xs font-semibold`}>
+                                {achievement.type}
+                              </span>
+                              <span className="text-xs text-gray-500">{achievement.year}</span>
+                            </div>
+                            <h3 className={`text-lg font-bold text-white group-hover:text-${achievement.color}-400 transition-colors duration-300 mb-1`}>
+                              {achievement.title}
+                            </h3>
+                          </div>
+                        </div>
+                        {/* Description */}
+                        <p className="text-gray-300 text-sm mb-4 leading-relaxed">
+                          {achievement.description}
+                        </p>
+                        {/* Footer */}
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs text-gray-500 uppercase tracking-wider">
+                            {achievement.category}
+                          </span>
+                          <div className="flex space-x-1">
+                            {[...Array(achievement.priority === 'high' ? 5 : 4)].map((_, i) => (
+                              <Star key={i} className="w-3 h-3 text-yellow-400 fill-current" />
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                      {/* Animated Background */}
+                      <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br from-${achievement.color}-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           );
         })}
