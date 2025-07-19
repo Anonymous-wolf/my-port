@@ -26,6 +26,7 @@ const Achievements = () => {
       icon: <Trophy className="w-6 h-6" />,
       color: "yellow",
       priority: "high",
+      image:"/images/sbc.jpg",
       hasImage: true
     },
     {
@@ -37,6 +38,7 @@ const Achievements = () => {
       icon: <Target className="w-6 h-6" />,
       color: "green",
       priority: "high",
+      image:"/images/hta.jpg",
       hasImage: true
     },
     {
@@ -48,6 +50,7 @@ const Achievements = () => {
       icon: <Medal className="w-6 h-6" />,
       color: "pink",
       priority: "high",
+      image:"/images/preu.jpg",
       hasImage: true
     },
     {
@@ -59,6 +62,7 @@ const Achievements = () => {
       icon: <Star className="w-6 h-6" />,
       color: "purple",
       priority: "high",
+      image:"/images/prou.jpg",
       hasImage: true
     },
 
@@ -72,6 +76,7 @@ const Achievements = () => {
       icon: <Brain className="w-6 h-6" />,
       color: "blue",
       priority: "high",
+      image:"/images/sih24.jpg",
       hasImage: true
     },
     {
@@ -83,6 +88,7 @@ const Achievements = () => {
       icon: <Lightbulb className="w-6 h-6" />,
       color: "orange",
       priority: "high",
+      image:"/images/sih23.jpg",
       hasImage: true
     },
 
@@ -96,6 +102,7 @@ const Achievements = () => {
       icon: <Trophy className="w-6 h-6" />,
       color: "gold",
       priority: "medium",
+      image:"/images/hit.jpg",
       hasImage: true
     },
     {
@@ -107,6 +114,7 @@ const Achievements = () => {
       icon: <Award className="w-6 h-6" />,
       color: "blue",
       priority: "medium",
+      image:"/images/srmp24.jpg",
       hasImage: true
     },
     {
@@ -118,6 +126,7 @@ const Achievements = () => {
       icon: <Star className="w-6 h-6" />,
       color: "teal",
       priority: "medium",
+      image:"/images/svce.jpg",
       hasImage: true
     },
     {
@@ -129,6 +138,7 @@ const Achievements = () => {
       icon: <Code className="w-6 h-6" />,
       color: "green",
       priority: "medium",
+      image:"/images/srm23.jpg",
       hasImage: true
     },
     {
@@ -140,6 +150,7 @@ const Achievements = () => {
       icon: <Trophy className="w-6 h-6" />,
       color: "purple",
       priority: "medium",
+      image:"/images/sai.jpg",
       hasImage: true
     },
     {
@@ -151,6 +162,7 @@ const Achievements = () => {
       icon: <Brain className="w-6 h-6" />,
       color: "indigo",
       priority: "medium",
+      image:"/images/kings.jpg",
       hasImage: true
     },
     {
@@ -162,6 +174,7 @@ const Achievements = () => {
       icon: <Zap className="w-6 h-6" />,
       color: "yellow",
       priority: "medium",
+      image:"/images/cit.jpg",
       hasImage: true
     },
 
@@ -175,6 +188,7 @@ const Achievements = () => {
       icon: <Medal className="w-6 h-6" />,
       color: "orange",
       priority: "high",
+      image:"/images/iit.jpg",
       hasImage: true
     },
     {
@@ -186,6 +200,7 @@ const Achievements = () => {
       icon: <Award className="w-6 h-6" />,
       color: "silver",
       priority: "medium",
+      image:"/images/cres.jpg",
       hasImage: true
     },
     {
@@ -197,6 +212,7 @@ const Achievements = () => {
       icon: <Crown className="w-6 h-6" />,
       color: "gold",
       priority: "high",
+      image:"/images/save.jpg",
       hasImage: true
     },
 
@@ -210,6 +226,7 @@ const Achievements = () => {
       icon: <Users className="w-6 h-6" />,
       color: "purple",
       priority: "high",
+      image:"/images/pes.jpg",
       hasImage: true
     },
     {
@@ -221,6 +238,7 @@ const Achievements = () => {
       icon: <Globe className="w-6 h-6" />,
       color: "blue",
       priority: "high",
+      image:"/images/ecell.jpg",
       hasImage: true
     }
   ];
