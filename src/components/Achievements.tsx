@@ -14,7 +14,7 @@ const Achievements = () => {
       icon: <Crown className="w-6 h-6" />,
       color: "purple",
       priority: "high",
-      image:"src/images/sac.jpg",
+      image:"/images/sac.jpg",
       hasImage: true
     },
     {
