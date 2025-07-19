@@ -14,7 +14,7 @@ const Achievements = () => {
       icon: <Crown className="w-6 h-6" />,
       color: "purple",
       priority: "high",
-      image:"/images/sac.jpg",
+      image: "/images/sac.jpg",
       hasImage: true
     },
     {
@@ -26,7 +26,7 @@ const Achievements = () => {
       icon: <Trophy className="w-6 h-6" />,
       color: "yellow",
       priority: "high",
-      image:"/images/sbc.jpg",
+      image: "/images/sbc.jpg",
       hasImage: true
     },
     {
@@ -38,7 +38,7 @@ const Achievements = () => {
       icon: <Target className="w-6 h-6" />,
       color: "green",
       priority: "high",
-      image:"/images/hta.jpg",
+      image: "/images/hta.jpg",
       hasImage: true
     },
     {
@@ -50,7 +50,7 @@ const Achievements = () => {
       icon: <Medal className="w-6 h-6" />,
       color: "pink",
       priority: "high",
-      image:"/images/preu.jpg",
+      image: "/images/preu.jpg",
       hasImage: true
     },
     {
@@ -62,11 +62,24 @@ const Achievements = () => {
       icon: <Star className="w-6 h-6" />,
       color: "purple",
       priority: "high",
-      image:"/images/prou.jpg",
+      image: "/images/prou.jpg",
       hasImage: true
     },
 
     // Hackathons & National Competitions
+    {
+      title: "Virtusa Corporation Hackathon Winner",
+      category: "National Hackathon",
+      type: "Winner",
+      year: "2025",
+      description: "Led a team of 6 members and built a Police Connect app, reducing violation registrations and response time by 60% using real-time alerting and streamlined grievance handling. Virtusa Corporation is an American-based global information technology services company.",
+      icon: <Trophy className="w-6 h-6" />,
+      color: "blue",
+      priority: "high",
+      image: "/images/virtusa.jpg", 
+      hasImage: true
+    },
+
     {
       title: "Smart India Hackathon Finalist 2024",
       category: "National Hackathon",
@@ -76,7 +89,7 @@ const Achievements = () => {
       icon: <Brain className="w-6 h-6" />,
       color: "blue",
       priority: "high",
-      image:"/images/sih24.jpg",
+      image: "/images/sih24.jpg",
       hasImage: true
     },
     {
@@ -88,7 +101,7 @@ const Achievements = () => {
       icon: <Lightbulb className="w-6 h-6" />,
       color: "orange",
       priority: "high",
-      image:"/images/sih23.jpg",
+      image: "/images/sih23.jpg",
       hasImage: true
     },
 
@@ -102,7 +115,7 @@ const Achievements = () => {
       icon: <Trophy className="w-6 h-6" />,
       color: "gold",
       priority: "medium",
-      image:"/images/hit.jpg",
+      image: "/images/hit.jpg",
       hasImage: true
     },
     {
@@ -114,7 +127,7 @@ const Achievements = () => {
       icon: <Award className="w-6 h-6" />,
       color: "blue",
       priority: "medium",
-      image:"/images/srmp24.jpg",
+      image: "/images/srmp24.jpg",
       hasImage: true
     },
     {
@@ -126,7 +139,7 @@ const Achievements = () => {
       icon: <Star className="w-6 h-6" />,
       color: "teal",
       priority: "medium",
-      image:"/images/svce.jpg",
+      image: "/images/svce.jpg",
       hasImage: true
     },
     {
@@ -138,7 +151,7 @@ const Achievements = () => {
       icon: <Code className="w-6 h-6" />,
       color: "green",
       priority: "medium",
-      image:"/images/srm23.jpg",
+      image: "/images/srm23.jpg",
       hasImage: true
     },
     {
@@ -150,7 +163,7 @@ const Achievements = () => {
       icon: <Trophy className="w-6 h-6" />,
       color: "purple",
       priority: "medium",
-      image:"/images/sai.jpg",
+      image: "/images/sai.jpg",
       hasImage: true
     },
     {
@@ -162,7 +175,7 @@ const Achievements = () => {
       icon: <Brain className="w-6 h-6" />,
       color: "indigo",
       priority: "medium",
-      image:"/images/kings.jpg",
+      image: "/images/kings.jpg",
       hasImage: true
     },
     {
@@ -174,7 +187,7 @@ const Achievements = () => {
       icon: <Zap className="w-6 h-6" />,
       color: "yellow",
       priority: "medium",
-      image:"/images/cit.jpg",
+      image: "/images/cit.jpg",
       hasImage: true
     },
 
@@ -188,7 +201,7 @@ const Achievements = () => {
       icon: <Medal className="w-6 h-6" />,
       color: "orange",
       priority: "high",
-      image:"/images/iit.jpg",
+      image: "/images/iit.jpg",
       hasImage: true
     },
     {
@@ -200,7 +213,7 @@ const Achievements = () => {
       icon: <Award className="w-6 h-6" />,
       color: "silver",
       priority: "medium",
-      image:"/images/cres.jpg",
+      image: "/images/cres.jpg",
       hasImage: true
     },
     {
@@ -212,7 +225,7 @@ const Achievements = () => {
       icon: <Crown className="w-6 h-6" />,
       color: "gold",
       priority: "high",
-      image:"/images/save.jpg",
+      image: "/images/save.jpg",
       hasImage: true
     },
 
@@ -226,7 +239,7 @@ const Achievements = () => {
       icon: <Users className="w-6 h-6" />,
       color: "purple",
       priority: "high",
-      image:"/images/pes.jpg",
+      image: "/images/pes.jpg",
       hasImage: true
     },
     {
@@ -238,7 +251,7 @@ const Achievements = () => {
       icon: <Globe className="w-6 h-6" />,
       color: "blue",
       priority: "high",
-      image:"/images/ecell.jpg",
+      image: "/images/ecell.jpg",
       hasImage: true
     }
   ];
@@ -254,14 +267,14 @@ const Achievements = () => {
 
   // Sort categories by importance
   const categoryOrder = [
-    'IEEE Leadership',
-    'IEEE Recognition', 
-    'IEEE Funding',
-    'IEEE Competition',
-    'National Hackathon',
-    'Prestigious Competition',
-    'Technical Competition',
+    'Prestigious Hackathons',
     'Professional Recognition',
+    'IEEE Recognition',
+    'IEEE Funding',
+    'Technical Competition',
+    'Prestigious Competition',
+    'IEEE Leadership',
+    'IEEE Competition',
     'Leadership Role'
   ];
 
@@ -297,7 +310,7 @@ const Achievements = () => {
   return (
     <section id="achievements" className="py-20 bg-gray-900 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 via-blue-900/10 to-pink-900/10"></div>
-      
+
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
           <div className="flex items-center justify-center mb-4">
@@ -349,7 +362,7 @@ const Achievements = () => {
                     className={`achievement-card group relative p-6 rounded-xl bg-gray-800/70 border border-gray-700 hover:border-${achievement.color}-500 transition-all duration-500 hover:scale-105 transform backdrop-blur-sm hover:shadow-2xl hover:shadow-${achievement.color}-500/30`}
                   >
                     {getPriorityBadge(achievement.priority)}
-                    
+
                     {/* Image placeholder */}
                     {achievement.hasImage && (
                       <div className="absolute -top-3 -left-3">
@@ -387,7 +400,7 @@ const Achievements = () => {
 
                       {/* Image Placeholder */}
                       <div className="mb-4 p-4 bg-gray-700/50 rounded-lg border border-gray-600 text-center">
-                        <div className="text-4xl mb-2"> 
+                        <div className="text-4xl mb-2">
                           <img src={achievement.image} alt="Achievement photo" className="w-full h-32 object-cover rounded-lg" />
 
                         </div>
